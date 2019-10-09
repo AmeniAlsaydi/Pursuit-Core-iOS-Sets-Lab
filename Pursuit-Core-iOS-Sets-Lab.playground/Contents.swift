@@ -132,7 +132,7 @@ var strThreeIsPangram: Bool = false
 var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
 for letter in alphabet {
-    if strOne.contains(letter) {
+    if strOne.lowercased().contains(letter) {
         strOneIsPangram = true
     } else {
         strOneIsPangram = false
@@ -141,16 +141,26 @@ for letter in alphabet {
 }
 
 for letter in alphabet {
-    if strTwo.contains(letter) {
+    if strTwo.lowercased().contains(letter) {
         strTwoIsPangram = true
     } else {
         strTwoIsPangram = false
         break
     }
 }
+// loop through and create new var with no spaces and puncuation
+
+var trimmedStr = ""
+
+for char in strThree {
+    if char.isPunctuation || char.isWhitespace {
+        continue
+    }
+trimmedStr += String(char) // type casting cahar to string
+}
 
 for letter in alphabet {
-    if strThree.contains(letter) {
+    if trimmedStr.lowercased().contains(letter) {
         strThreeIsPangram = true
     } else {
         strThreeIsPangram = false
@@ -158,15 +168,11 @@ for letter in alphabet {
     }
 }
 
+
+
 assert(strOneIsPangram == true, "Was expecting true, but got \(strOneIsPangram)")
 assert(strTwoIsPangram == false, "Was expecting false, but got \(strTwoIsPangram)")
-assert(strThreeIsPangram == false, "Was expecting false, but got \(strThreeIsPangram)")
-
-
-
-
-
-
+assert(strThreeIsPangram == true, "Was expecting true, but got \(strThreeIsPangram)")
 
 
 
